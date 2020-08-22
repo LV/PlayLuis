@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf8">
+		<title>Play Luis | Chess</title>
+		<!-- Import Bootstrap and JQuery -->
+		<link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="../../index.html">Play Luis</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+			<div class="collapse navbar-collapse" id="navbarColor03">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="../../index.html">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Games</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="chesspick.html">Chess</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="games/comingsoon.html">Coming soon</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Main -->
+		<div class="container">
+			<br><br><br>
+			<div class="page-header" id="banner">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1><center>Select your difficulty</center></h1>
+					</div>
+				</div>
+			</div>
+			<br><br>
+			<div class="row">
+				<!-- Brodie Card -->
+				<div class="col-lg-6">
+					<div class="card mb-3">
+						<h3 class="card-header"><center>Brodie</center></h3>
+						<div class="card-body">
+							<h5 class="card-title">Difficulty: <span class="badge badge-success">Easy</span></h5>
+						</div>
+						<center><img style="height: 40%; width: 40%; display: block;" src="../../img/BrodieAvatar.png" alt="Card image"></center>
+						<div class="card-body">
+							<p class="card-text">This guy doesn't give two shits about anything, and will play exactly just like that. You should have no problem beating this guy.</p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Thinking time: <span class="badge badge-pill badge-secondary">1 sec</span></li>
+						</ul>
+						<div class="card-body">
+							<center><button type="button" class="btn btn-success" onclick="location.href='easy.html'">Play</button></center>
+						</div>
+					</div>
+				</div>
+
+				<!-- Luis Card -->
+				<div class="col-lg-6">
+					<div class="card mb-3">
+						<h3 class="card-header"><center>Luis</center></h3>
+						<div class="card-body">
+							<h5 class="card-title">Difficulty: <span class="badge badge-danger">Hard</span></h5>
+						</div>
+						<center><img style="height: 40%; width: 40%; display: block;" src="../../img/LuisAvatar.png" alt="Card image"></center>
+						<div class="card-body">
+							<p class="card-text">Brodie's father. </p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Thinking time: <span class="badge badge-pill badge-secondary">10 sec</span></li>
+						</ul>
+						<div class="card-body">
+							<center><button type="button" class="btn btn-danger" onclick="location.href='hard.html'">Play</button></center>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p>&nbsp;</p>
+		</div>
+	</body>
+</html>
+
