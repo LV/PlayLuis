@@ -249,7 +249,6 @@ function AlphaBeta(alpha, beta, depth) {
 
 function ClearForSearch() {
 	var index = 0;
-	var index2 = 0;
 
 	for(index = 0; index < 13 * BRD_SQ_NUM; ++index) {
 		GameBoard.searchHistory[index] = 0;
@@ -333,5 +332,4 @@ function UpdateDOMStats(dom_score, dom_depth) {
 	$("#NodesOut").text(SearchController.nodes.toLocaleString("en"));
 	$("#TotalNodesOut").text(SearchController.totalnodes.toLocaleString("en"));
 	//$("#TimeOut").text("Time: " + (($.now()-SearchController.start)/1000).toFixed(1) + "s");
-	//$("#BestOut").text("BestMove: " + PrMove(SearchController.best));
 }

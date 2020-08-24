@@ -214,19 +214,38 @@ function ThreeFoldRep() {
 	return r;
 }
 
+function togglePopup(){
+	document.getElementById("popup-1").classList.toggle("active");
+}
+
 function CheckResult() {
 	if(GameBoard.fiftyMove >= 100) {
 		$("#GameStatus").text["GAME DRAWN (Fifty Move Rule)"];
+		$("#statusHeading").replaceWith( "<div id=\"statusHeading\"><h1>Draw!</h1></div>" );
+		$("#statusContent").replaceWith( "<div id=\"statusContent\"><p>You have drawn after 50 meaningless moves</p></div>" );
+		togglePopup();
+
+		$("#cardStatus").replaceWith( "<div class=\"card text-white bg-warning mb-3\" style=\"max-width: 20rem;\"><div class=\"card-body\"><h4 class=\"card-title\">Draw</h4><p class=\"card-text\">After a hard fought game, there's been no blood. Up for another game?</p></div>" );
 		return true;
 	}
 
 	if(ThreeFoldRep() >= 2) {
 		$("#GameStatus").text["GAME DRAWN (Three-fold repetition)"];
+		$("#statusHeading").replaceWith( "<div id=\"statusHeading\"><h1>Draw!</h1></div>" );
+		$("#statusContent").replaceWith( "<div id=\"statusContent\"><p>You have drawn after 3 consecutive repeated moves</p></div>" );
+		togglePopup();
+
+		$("#cardStatus").replaceWith( "<div class=\"card text-white bg-warning mb-3\" style=\"max-width: 20rem;\"><div class=\"card-body\"><h4 class=\"card-title\">Draw</h4><p class=\"card-text\">It looks like there was too much to lose for both of you. No one's come on top this time, up for another game?</p></div>" );
 		return true;
 	}
 
 	if(DrawMaterial()) {
 		$("#GameStatus").text["GAME DRAWN (Insufficient material to win)"];
+		$("#statusHeading").replaceWith( "<div id=\"statusHeading\"><h1>Draw!</h1></div>" );
+		$("#statusContent").replaceWith( "<div id=\"statusContent\"><p>It is impossible for anyone to win given the current amount of pieces left</p></div>" );
+		togglePopup();
+
+		$("#cardStatus").replaceWith( "<div class=\"card text-white bg-warning mb-3\" style=\"max-width: 20rem;\"><div class=\"card-body\"><h4 class=\"card-title\">Draw</h4><p class=\"card-text\">After a bloody battle, no one's come on top. Up for another round?</p></div>" );
 		return true;
 	}
 
@@ -251,13 +270,28 @@ function CheckResult() {
 	if(InCheck) {
 		if(GameBoard.side == COLORS.WHITE) {
 			$("#GameStatus").text("GAME OVER (Black wins)");
+			$("#statusHeading").replaceWith( "<div id=\"statusHeading\"><h1>You Lost</h1></div>" );
+			$("#statusContent").replaceWith( "<div id=\"statusContent\"><p>You have lost to a dog</p></div>" );
+			togglePopup();
+
+			$("#cardStatus").replaceWith( "<div class=\"card text-white bg-danger mb-3\" style=\"max-width: 20rem;\"><div class=\"card-body\"><h4 class=\"card-title\">You Lose</h4><p class=\"card-text\">Brodie has chumped you in style. Up for a rematch?</p></div>" );
 			return true;
 		} else {
 			$("#GameStatus").text("GAME OVER (White wins)");
+			$("#statusHeading").replaceWith( "<div id=\"statusHeading\"><h1>You Win!</h1></div>" );
+			$("#statusContent").replaceWith( "<div id=\"statusContent\"><p>The beast has been slain</p></div>" );
+			togglePopup();
+
+			$("#cardStatus").replaceWith( "<div class=\"card text-white bg-success mb-3\" style=\"max-width: 20rem;\"><div class=\"card-body\"><h4 class=\"card-title\">You Win!</h4><p class=\"card-text\">Congratulations on your well earned victory. Now Brodie will go back to sleeping for another 16 hours before wanting to eat some steak. Now that you've beaten my child, you'll have to face me next. See you on the other side!</p></div>" );
 			return true;
 		}
 	} else {
 		$("#GameStatus").text("GAME DRAWN (Stalemate)");
+		$("#statusHeading").replaceWith( "<div id=\"statusHeading\"><h1>Stalemate!</h1></div>" );
+		$("#statusContent").replaceWith( "<div id=\"statusContent\"><p>There are no legal moves for Brodie and he's not in check, meaning that the game is drawn.</p></div>" );
+		togglePopup();
+
+		$("#cardStatus").replaceWith( "<div class=\"card text-white bg-warning mb-3\" style=\"max-width: 20rem;\"><div class=\"card-body\"><h4 class=\"card-title\">Draw</h4><p class=\"card-text\">You've completely fucked that one up and thrown the game away. What a shame. Rematch?</p></div>" );
 		return true;
 	}
 }
@@ -291,4 +325,39 @@ function StartSearch() {
 	MakeMove(SearchController.best);
 	MoveGUIPiece(SearchController.best);
 	CheckAndSet();
+}
+
+// Timer
+var blackTime = 0;
+var whiteTime = 0;
+setInterval(UpdateWhiteCounter, 1000);
+setInterval(UpdateBlackCounter, 100);
+
+function UpdateWhiteCounter() {
+	if(GameBoard.side == COLORS.WHITE) {
+		whiteTime++;
+		minutes = Math.floor(whiteTime/60);
+		seconds = whiteTime % 60;
+
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+
+		$("#whiteTimer").replaceWith( "<div id=\"whiteTimer\">" + minutes + ":" + seconds + "</div>" );
+	}
+}
+
+function UpdateBlackCounter() {
+	if(GameBoard.side == COLORS.BLACK) {
+		// The engine thinking completely fucks the timer up, for some reason blackTime increases by
+		// intervals of 2 instead of counting up properly, so we have to apply a really shitty fix
+		blackTime++;
+		minutes = Math.floor(blackTime/120);
+		seconds = Math.floor(blackTime/2) % 60;
+
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+
+		//$("#blackTimer").replaceWith( "<div id=\"blackTimer\">" + minutes + ":" + seconds + "</div>" );
+		$("#blackTimer").replaceWith( "<div id=\"blackTimer\">" + minutes + ":" + seconds + "</div>" );
+	}
 }
