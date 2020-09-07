@@ -319,7 +319,7 @@ $("#SearchButton").click( function () {
 
 function StartSearch() {
 	SearchController.depth = MAXDEPTH;
-	SearchController.time = parseInt(10) * 1000;	// in milliseconds
+	SearchController.time = parseInt(5) * 1000;	// in milliseconds
 	SearchPosition();
 
 	MakeMove(SearchController.best);
